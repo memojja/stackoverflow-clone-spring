@@ -1,9 +1,12 @@
 package com.eteration.controller;
 
 import com.eteration.model.Question;
+import com.eteration.model.dto.CommentDto;
+import com.eteration.model.dto.QuestionDto;
 import com.eteration.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,13 +32,15 @@ public class QuestionController {
 
     @RequestMapping(value = "/questions/new",method = RequestMethod.GET)
     public ModelAndView getQuestionForm(){
-        return new ModelAndView("createQuestion","question",new Question());
+        return new ModelAndView("createQuestion","question",new QuestionDto());
     }
 
     @RequestMapping(value = "/questions",method = RequestMethod.POST)
-    public String handleQuestionForm(@ModelAttribute Question question){
-        questionService.save(question);
-        return "redirect:/questions/" + question.getId();
+    public String handleQuestionForm(@ModelAttribute QuestionDto question){
+        Question question1 = new Question();
+        question1.setDescription(question.getDescription());
+        questionService.save(question1);
+        return "redirect:/questions/" + question1.getId();
     }
 
     @RequestMapping("/questions")
@@ -44,13 +49,15 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/questions/{id}")
-    public ModelAndView getQuestionById(@PathVariable("id")Long id){
-        return new ModelAndView("question","question",questionService.findQuestionById(id));
+    public String getQuestionById(@PathVariable("id")Long id,Model model){
+        model.addAttribute("question",questionService.findQuestionById(id));
+        model.addAttribute("comment",new CommentDto());
+        return "question";
     }
 
     @RequestMapping(value = "/question/{id}",method = RequestMethod.DELETE)
     public String deleteQuestionById(@PathVariable("id")Long id){
-        questionService.deleteQuestionById(id);
+        questionService.delete(id);
         return "redirect:/questions";
     }
 

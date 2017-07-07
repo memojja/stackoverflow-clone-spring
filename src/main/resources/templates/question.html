@@ -5,7 +5,23 @@
     <title>Title</title>
 </head>
 <body>
+<li th:text="${question.id}" />
+
 <li th:text="${question.description}" />
+
+cevaplar:
+
+<div th:each=" comment :${question.comments}">
+<span th:text="${comment.description}" />
+</div>
+
+<form th:action="@{/comments}" method="post" >
+    <input type="text" name="description" th:field="*{comment.description}" />
+    <input type="hidden" th:field="*{question.id}" th:value="${question.id}"/>
+    <input type="hidden" name="questionId" th:field="*{comment.questionId}" th:value="${question.id}"/>
+
+    <input type="button" value="Tikla" />
+</form>
 
 </body>
 </html>

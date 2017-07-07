@@ -12,5 +12,5 @@ public interface QuestionService {
     public Question findQuestionById(Long id);
     public void save(Question question);
     public List<Question> getQuestionList();
-    public void deleteQuestionById(Long id);
+    public void delete(Long id);
 }

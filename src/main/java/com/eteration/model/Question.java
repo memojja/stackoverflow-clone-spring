@@ -1,9 +1,6 @@
 package com.eteration.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +18,8 @@ public class Question {
     //private User user;
     //private Category category;
     //private List<Vote> votes;
+    @OneToMany
+    private List<Comment> comments;
 
 
     public Question(){
@@ -53,5 +52,13 @@ public class Question {
 
     public void setCratedDate(Date cratedDate) {
         this.cratedDate = cratedDate;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

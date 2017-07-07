@@ -6,6 +6,7 @@ import com.eteration.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void save(Question question) {
+        question.setCratedDate(new Date());
         questionDao.save(question);
     }
 
@@ -39,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteQuestionById(Long id) {
+    public void delete(Long id) {
         questionDao.delete(id);
     }
 }
