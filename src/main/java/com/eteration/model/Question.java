@@ -1,31 +1,42 @@
 package com.eteration.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by memojja on 04/07/2017.
  */
+@Entity
 public class Question {
 
-    private String title;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String description;
-    private String categories;
+    private Date cratedDate;
+    //private User user;
+    //private Category category;
+    //private List<Vote> votes;
 
-    public Question(String title, String description) {
-        this.title = title;
+
+    public Question(){
+    }
+    public Question(Long id, String description, Date cratedDate) {
+        this.id = id;
         this.description = description;
+        this.cratedDate = cratedDate;
     }
 
-    public Question(String title, String description, String categories) {
-        this.title = title;
-        this.description = description;
-        this.categories = categories;
+    public Long getId() {
+        return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -36,11 +47,11 @@ public class Question {
         this.description = description;
     }
 
-    public String getCategories() {
-        return categories;
+    public Date getCratedDate() {
+        return cratedDate;
     }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
+    public void setCratedDate(Date cratedDate) {
+        this.cratedDate = cratedDate;
     }
 }
