@@ -13,4 +13,5 @@ public interface QuestionService {
     public void save(Question question);
     public List<Question> getQuestionList();
     public void delete(Long id);
+
 }

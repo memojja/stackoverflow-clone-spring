@@ -1,14 +1,18 @@
 package com.eteration.controller;
 
+import com.eteration.model.Category;
 import com.eteration.model.Question;
 import com.eteration.model.dto.CommentDto;
 import com.eteration.model.dto.QuestionDto;
+import com.eteration.service.CategoryService;
 import com.eteration.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.*;
 
 /**
  * Created by memojja on 07/07/2017.
@@ -17,18 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, CategoryService categoryService) {
         this.questionService = questionService;
+        this.categoryService = categoryService;
     }
-
-    /*
-    @RequestMapping(value = "/questions/{id}" ,method = RequestMethod.GET)
-    public @ResponseBody Question listQuestions(@PathVariable("id") Long id) {
-        return questionService.findQuestionById(id);
-    }
-    */
 
     @RequestMapping(value = "/questions/new",method = RequestMethod.GET)
     public ModelAndView getQuestionForm(){
@@ -36,15 +35,13 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/questions",method = RequestMethod.POST)
-    public String handleQuestionForm(@ModelAttribute QuestionDto question){
-        Question question1 = new Question();
-        question1.setDescription(question.getDescription());
-        questionService.save(question1);
-        return "redirect:/questions/" + question1.getId();
+    public String handleQuestionForm(@ModelAttribute QuestionDto questionDto){
+        categoryService.assignCategoryWithQuestion(questionDto);
+        return "redirect:/questions/";
     }
 
     @RequestMapping("/questions")
-    public ModelAndView getQuestionList(){
+    public ModelAndView getQuestionList(Model model){
         return new ModelAndView("questionList","questions",questionService.getQuestionList());
     }
 

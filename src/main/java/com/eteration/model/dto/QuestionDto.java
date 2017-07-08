@@ -6,12 +6,22 @@ package com.eteration.model.dto;
 public class QuestionDto {
 
     private  String description;
+    private String categories;
 
     public String getDescription() {
         return description;
     }
 
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

@@ -41,5 +41,5 @@ public class CommentController {
         commentService.delete(id);
         return "redirect:/questions";
     }
-    
+
 }

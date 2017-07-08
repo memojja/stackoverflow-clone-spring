@@ -3,6 +3,7 @@ package com.eteration.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by memojja on 04/07/2017.
@@ -16,8 +17,11 @@ public class Question {
     private String description;
     private Date cratedDate;
     //private User user;
-    //private Category category;
-    //private List<Vote> votes;
+
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    private Set<Category> category;
+
     @OneToMany
     private List<Comment> comments;
 
@@ -60,5 +64,13 @@ public class Question {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Set<Category> getCategory() {
+        return category;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
     }
 }

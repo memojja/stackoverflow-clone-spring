@@ -15,6 +15,24 @@ cevaplar:
 <span th:text="${comment.description}" />
 </div>
 
+
+categoriess<br/>
+<tr th:each="category : ${question.category}">
+    <td th:text="${category.name}"></td>
+
+</tr><br/>
+
+commentss
+
+<tr th:each="comment : ${question.comments}">
+    <td th:text="${comment.description}">
+
+
+    </td>
+
+</tr>
+
+add comment
 <form th:action="@{/comments}" method="post" >
     <input type="text" name="description" th:field="*{comment.description}" />
     <input type="hidden" th:field="*{question.id}" th:value="${question.id}"/>

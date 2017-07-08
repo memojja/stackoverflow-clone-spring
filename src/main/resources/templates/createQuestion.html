@@ -11,7 +11,10 @@
 
 <form th:action="@{/questions}" method="post" th:object="${question}" >
     <input type="text" name="description" th:field="*{description}" />
-    <input type="button" value="Tikla" />
+    categories:
+    <input type="text" name="categories" th:field="*{categories}" />
+
+    <input type="submit" value="Tikla" />
 </form>
 </body>
 </html>
