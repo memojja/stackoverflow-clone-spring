@@ -22,10 +22,12 @@ public class Category {
         this.name = name;
     }
 
+
     public Category(String name, Set<Question> questions) {
         this.name = name;
         this.questions = questions;
     }
+
 
     public Long getId() {
         return id;

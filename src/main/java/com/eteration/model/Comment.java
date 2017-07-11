@@ -1,9 +1,6 @@
 package com.eteration.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,8 +12,15 @@ public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
-    //private List<Vote> votes;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    private Vote vote;
+
+    public Comment(){}
+    public Comment(String description, Vote vote) {
+        this.description = description;
+        this.vote = vote;
+    }
 
     public Long getId() {
         return id;
@@ -33,4 +37,14 @@ public class Comment {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Vote getVote() {
+        return vote;
+    }
+
+    public void setVote(Vote vote) {
+        this.vote = vote;
+    }
+
+
 }

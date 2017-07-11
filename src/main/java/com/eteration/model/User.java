@@ -1,20 +1,49 @@
 package com.eteration.model;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by memojja on 04/07/2017.
  */
+@Table(name = "author")
+@Entity
 public class User {
 
+    @Column(name = "user_id")
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "username")
     private String username;
-    private String surname;
+    @Column(name = "email")
     private String email;
-    private int phone;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "password")
     private String password;
+
+    @OneToMany
     private List<Comment> comments;
+    @OneToMany
     private List<Question> questions;
+
+    public User(){}
+
+    public User(String username, String email, String phone, String password) {
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+    }
+
+    public User(String username, String email, String phone, String password, List<Comment> comments, List<Question> questions) {
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.comments = comments;
+        this.questions = questions;
+    }
 
     public Long getId() {
         return id;
@@ -32,14 +61,6 @@ public class User {
         this.username = username;
     }
 
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -48,11 +69,11 @@ public class User {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -79,4 +100,6 @@ public class User {
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
     }
+
+
 }

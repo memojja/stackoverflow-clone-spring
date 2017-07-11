@@ -15,14 +15,17 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
-    private Date cratedDate;
-    //private User user;
-
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
+    @OneToOne
+    private Vote vote;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    private User user;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     private Set<Category> category;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Comment> comments;
 
 
@@ -31,7 +34,16 @@ public class Question {
     public Question(Long id, String description, Date cratedDate) {
         this.id = id;
         this.description = description;
-        this.cratedDate = cratedDate;
+        this.createdDate = cratedDate;
+    }
+
+    public Question(String description, Date cratedDate, Vote vote, User user, Set<Category> category, List<Comment> comments) {
+        this.description = description;
+        this.createdDate = cratedDate;
+        this.vote = vote;
+        this.user = user;
+        this.category = category;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -50,12 +62,12 @@ public class Question {
         this.description = description;
     }
 
-    public Date getCratedDate() {
-        return cratedDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCratedDate(Date cratedDate) {
-        this.cratedDate = cratedDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public List<Comment> getComments() {
@@ -72,5 +84,21 @@ public class Question {
 
     public void setCategory(Set<Category> category) {
         this.category = category;
+    }
+
+    public Vote getVote() {
+        return vote;
+    }
+
+    public void setVote(Vote vote) {
+        this.vote = vote;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

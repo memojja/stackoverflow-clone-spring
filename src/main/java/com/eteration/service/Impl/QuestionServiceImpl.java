@@ -30,7 +30,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void save(Question question) {
-        question.setCratedDate(new Date());
+        question.setCreatedDate(new Date());
         questionDao.save(question);
     }
 
