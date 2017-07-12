@@ -21,6 +21,8 @@ public class User {
     private String phone;
     @Column(name = "password")
     private String password;
+    @Column(name="role")
+    private String roleName;
 
     @OneToMany
     private List<Comment> comments;
@@ -29,21 +31,25 @@ public class User {
 
     public User(){}
 
-    public User(String username, String email, String phone, String password) {
+    public User(String username, String email, String phone, String password,String roleName) {
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.roleName=roleName;
     }
 
-    public User(String username, String email, String phone, String password, List<Comment> comments, List<Question> questions) {
+    public User(String username, String email, String phone, String password,String roleName, List<Comment> comments, List<Question> questions) {
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.comments = comments;
         this.questions = questions;
+        this.roleName=roleName;
+
     }
+
 
     public Long getId() {
         return id;
@@ -83,6 +89,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public List<Comment> getComments() {

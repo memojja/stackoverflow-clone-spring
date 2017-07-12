@@ -9,4 +9,6 @@ import com.eteration.model.Vote;
 public interface UserService {
 
     void save(User user);
+
+    public User findByUsername(String username);
 }
