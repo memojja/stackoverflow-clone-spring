@@ -50,6 +50,8 @@ public class DatabaseLoader implements CommandLineRunner {
         Question question = new Question("question",new Date(),vote,user1,
                 categories,
                 comments);
+        Question question1 =new Question();
+
 
         List<Question> questions =new ArrayList<Question>();
         questions.add(question);
@@ -58,6 +60,7 @@ public class DatabaseLoader implements CommandLineRunner {
         user.setPassword(securityService.bCryptPasswordEncoder().encode(user.getPassword()));
 
         questionService.save(question);
+        questionService.save(question1);
         userService.save(user);
         voteService.save(vote);
         categoryService.save(category);

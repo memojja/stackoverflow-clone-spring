@@ -1,5 +1,7 @@
 package com.eteration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +16,7 @@ public class Category {
     private Long id;
     private  String name;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.ALL})
     private Set<Question> questions;
 

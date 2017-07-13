@@ -14,6 +14,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String title;
     private String description;
     @Temporal(TemporalType.DATE)
     private Date createdDate;
@@ -101,4 +102,13 @@ public class Question {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getTitle(String title) {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
 }

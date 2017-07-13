@@ -1,0 +1,21 @@
+
+<div class="section">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2>All Questions</h2>
+
+
+        <ul class="list-group" ng-repeat="a in  bk.questions">
+            <div class="form-group">
+                <li class="list-group-item row"><span class="col-xs-9">{{a.description}}</span>
+
+                    <input type="button" class="btn btn-primary col-xs-3" value="Ayrıntılar" ng-click="bk.detailQuestion(a.id)"></input>
+                </li>
+            </div>
+
+        </ul>
+
+    </div>
+    <div class="col-md-2"></div>
+</div>

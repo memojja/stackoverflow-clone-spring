@@ -7,11 +7,14 @@ import com.eteration.model.dto.QuestionDto;
 import com.eteration.service.CategoryService;
 import com.eteration.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.*;
 
 /**
@@ -34,28 +37,31 @@ public class QuestionController {
         return new ModelAndView("createQuestion","question",new QuestionDto());
     }
 
-    @RequestMapping(value = "/questions",method = RequestMethod.POST)
-    public String handleQuestionForm(@ModelAttribute QuestionDto questionDto){
-        categoryService.assignCategoryWithQuestion(questionDto);
-        return "redirect:/questions/";
+    @RequestMapping(value = "/questions",method = RequestMethod.POST ,headers = "content-type=application/json")
+    @ResponseBody
+    public void handleQuestionForm(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult){
+        System.out.println(questionDto);
+        if(!bindingResult.hasErrors())
+        {
+            System.out.println(categoryService);
+            categoryService.assignCategoryWithQuestion(questionDto);
+        }
     }
 
-    @RequestMapping("/questions")
-    public ModelAndView getQuestionList(Model model){
-        return new ModelAndView("questionList","questions",questionService.getQuestionList());
-    }
 
     @RequestMapping(value = "/questions/{id}")
-    public String getQuestionById(@PathVariable("id")Long id,Model model){
-        model.addAttribute("question",questionService.findQuestionById(id));
-        model.addAttribute("comment",new CommentDto());
-        return "question";
+    public @ResponseBody Question getQuestionById(@PathVariable("id") Long id){
+        return questionService.findQuestionById(id);
+    }
+    @RequestMapping("/questions")
+    public @ResponseBody List<Question> getQuestionList(Model model){
+        return questionService.getQuestionList();
     }
 
-    @RequestMapping(value = "/question/{id}",method = RequestMethod.DELETE)
-    public String deleteQuestionById(@PathVariable("id")Long id){
+    @ResponseBody
+    @RequestMapping(value = "/questions/{id}",method = RequestMethod.DELETE)
+    public void deleteQuestionById(@PathVariable("id")Long id){
         questionService.delete(id);
-        return "redirect:/questions";
     }
 
     

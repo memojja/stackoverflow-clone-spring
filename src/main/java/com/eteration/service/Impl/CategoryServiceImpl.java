@@ -56,6 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void assignCategoryWithQuestion(QuestionDto questionDto) {
         Question question = new Question();
+        question.getTitle(questionDto.getTitle());
         String[] categories = createQuestionFromQuestionDto(questionDto);
         assignQuestionWithCategory(questionDto, question, categories);
 
@@ -80,7 +81,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     private String[] createQuestionFromQuestionDto(QuestionDto questionDto) {
+        System.out.println("---");
+
         String[] categories = questionDto.getCategories().split(" ");
+        System.out.println(categories);
+        System.out.println("===");
+
         Arrays.stream(categories)
                 .filter(a -> !(existByName(a)))
                 .forEach(a-> {
