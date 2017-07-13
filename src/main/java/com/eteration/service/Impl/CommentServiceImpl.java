@@ -46,6 +46,9 @@ public class CommentServiceImpl implements CommentService{
     public void assignCommentWithQuestion(CommentDto commentDto, Question questionDto) {
 
         Comment comment = new Comment();
+        System.out.println("-=-------------------");
+
+        System.out.println(commentDto);
         comment.setDescription(commentDto.getDescription());
         save(comment);
 

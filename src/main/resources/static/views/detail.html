@@ -5,3 +5,28 @@
     <div ng-repeat="category in bk.category">
         {{category.name}}
     </div>
+
+
+<div ng-controller="commentController as k">
+    <form  ng-submit="SendComment()">
+
+        <div class="form-group">
+            <label class="form-group">Tags</label>
+            <input type="text" class="form-control"  name="description"  ng-model="categories" />
+            <input type="hidden" class="form-control"  name="description"  ng-value="bk.questionId" ng-model="questionId" />
+           aa {{bk.questionId}}bbb
+
+
+        </div>
+
+        <div class="form-group" style="float: right">
+            <input class="btn btn-primary" type="submit" value="Tikla" />
+
+        </div>
+
+    </form>
+    {{ResponseDetails}}
+
+    ----{{k.deneme}}---
+    ==={{deneme}}===
+</div>

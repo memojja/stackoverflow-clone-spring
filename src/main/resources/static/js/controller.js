@@ -114,7 +114,7 @@ app.controller("createQuestion", function ($scope, $http) {
 
 
 
-app.controller("categoryController", function ($scope, $http,categoryService) {
+app.controller("commentController", function ($scope, $http) {
     $scope.deneme="deneme";
 
     $scope.SendComment = function () {
@@ -136,7 +136,7 @@ app.controller("categoryController", function ($scope, $http,categoryService) {
             }
         };
 
-        $http.post('http://localhost:8080/questions', data, config)
+        $http.post('http://localhost:8080/comments', data, config)
             .success(function (data, status, headers, config) {
                 window.location = "#/questions";
 

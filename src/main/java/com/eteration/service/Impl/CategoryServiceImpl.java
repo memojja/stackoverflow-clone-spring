@@ -57,7 +57,8 @@ public class CategoryServiceImpl implements CategoryService {
     public void assignCategoryWithQuestion(QuestionDto questionDto) {
         Question question = new Question();
         question.getTitle(questionDto.getTitle());
-        String[] categories = createQuestionFromQuestionDto(questionDto);
+        String[] categories = new String[55];
+        categories=createQuestionFromQuestionDto(questionDto);
         assignQuestionWithCategory(questionDto, question, categories);
 
         questionService.save(question);

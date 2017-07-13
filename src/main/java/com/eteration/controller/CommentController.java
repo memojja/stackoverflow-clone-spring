@@ -29,9 +29,10 @@ public class CommentController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/comments",method = RequestMethod.POST)
-    public void handleComment( @ModelAttribute("comment")CommentDto comment,@ModelAttribute("question") Question question){
+    @RequestMapping(value = "/comments",method = RequestMethod.POST,headers = "content-type=application/json")
+    public void handleComment( @RequestBody CommentDto comment,  @RequestBody Question question){
         commentService.assignCommentWithQuestion(comment,question);
+
     }
 
     @RequestMapping(value = "/comments/{id}")

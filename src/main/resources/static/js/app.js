@@ -36,10 +36,3 @@ app.factory('denemeService', function($resource) {
 app.factory('questionService',function ($resource) {
     return $resource('http://localhost:8080/questions/:id',{question: '@question'});
 });
-
-app.factory('categoryService',function ($resource) {
-    return $resource('http://localhost:8080/comments/:id',{comment: '@comment'});
-
-
-})
-
