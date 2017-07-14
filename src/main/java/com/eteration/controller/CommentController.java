@@ -28,10 +28,12 @@ public class CommentController {
     }
 
 
+
     @ResponseBody
-    @RequestMapping(value = "/comments",method = RequestMethod.POST,headers = "content-type=application/json")
-    public void handleComment( @RequestBody CommentDto comment,  @RequestBody Question question){
-        commentService.assignCommentWithQuestion(comment,question);
+    @RequestMapping(value = "/comments/{id}",method = RequestMethod.POST,headers = "content-type=application/json")
+    public void handleComment( @RequestBody CommentDto comment,@PathVariable("id") Long id){
+
+        commentService.assignCommentWithQuestion(comment,questionService.findQuestionById(id));
 
     }
 

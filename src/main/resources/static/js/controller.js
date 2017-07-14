@@ -113,7 +113,6 @@ app.controller("createQuestion", function ($scope, $http) {
 
 
 
-
 app.controller("commentController", function ($scope, $http) {
     $scope.deneme="deneme";
 
@@ -122,8 +121,6 @@ app.controller("commentController", function ($scope, $http) {
         var data = JSON.stringify({
             "description": $scope.description,
         });
-
-
 
 
         var config = {
@@ -136,10 +133,10 @@ app.controller("commentController", function ($scope, $http) {
             }
         };
 
-        $http.post('http://localhost:8080/comments', data, config)
+        $http.post('/comments/'+ 1, data, config)
             .success(function (data, status, headers, config) {
+                $scope.a=data;
                 window.location = "#/questions";
-
 
             })
             .error(function (data, status, header, config) {
